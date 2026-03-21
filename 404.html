@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script>
+      (function () {
+        var routeNames = {
+          servers: true,
+          history: true,
+          transport: true,
+          items: true,
+          realty: true,
+          clothes: true,
+          map: true,
+        };
+        var segments = window.location.pathname.split('/').filter(Boolean);
+        var basePrefix = '';
+        if (segments.length > 0 && !routeNames[segments[0]]) {
+          basePrefix = '/' + segments[0];
+          segments = segments.slice(1);
+        }
+        var routePath = '/' + segments.join('/');
+        if (routePath === '/') {
+          routePath = '/';
+        }
+        var fullPath = routePath + window.location.search + window.location.hash;
+        window.location.replace(window.location.origin + basePrefix + '/?p=' + encodeURIComponent(fullPath));
+      })();
+    </script>
+  </body>
+</html>
